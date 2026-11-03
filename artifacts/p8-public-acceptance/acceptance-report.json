@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-02T13:46:57.706Z",
+  "network": "portaldot-testnet",
+  "explorer": "https://node-console.portaldot.dev/",
+  "source": {
+    "database": "SQLite evidence store",
+    "transactionRecords": 0,
+    "successfulFinalizedTransactions": 0
+  },
+  "gitRevision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+  "deployments": [
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "token_a",
+      "address": "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "codeHash": "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5",
+      "metadataHash": "0x80789771cc96a5f6fe8ecf4976107ee43ab9be7eafb0fbf48a2f4aae1f022289",
+      "deployTxHash": "0x6add00b1cb1c46744bcea49d688d4a2708f095bebf94e1e4067b48205b6effe6",
+      "deployBlockHash": "0x4443b8a74524086d963b4de1bdbc3ecb476d81ee8a3afb4e8334477d1484a4d0"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "token_b",
+      "address": "5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "codeHash": "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5",
+      "metadataHash": "0x80789771cc96a5f6fe8ecf4976107ee43ab9be7eafb0fbf48a2f4aae1f022289",
+      "deployTxHash": "0x5e41242d3c2e63271da6cd2be61fa51c00a457049d13c185ad11461ffaa23bcd",
+      "deployBlockHash": "0x0678598cf74f0dc9ebdfa81da570a07517ad04cff71fc87c268543dd7aea2efe"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "pool_a",
+      "address": "5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx",
+      "codeHash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa",
+      "metadataHash": "0x249126089c7235a14c87a2cde0529967a4be2c227fa5d57bc3aed20c55153dd6",
+      "deployTxHash": "0x3fb6d6d3bb3a8ae3182df26467dab66801150dd907a0edfcce07132bdfaabc80",
+      "deployBlockHash": "0x6fcabb4ff500764dc074533c741d2fae1a4fc86f0eba6bfacc6e7d9ef28ac5b8"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "pool_b",
+      "address": "5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7",
+      "codeHash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa",
+      "metadataHash": "0x249126089c7235a14c87a2cde0529967a4be2c227fa5d57bc3aed20c55153dd6",
+      "deployTxHash": "0x91a0172d41d4706aff234c1cb79dd64203ca28ece26e91912cd4f40892dfd672",
+      "deployBlockHash": "0x1787cbc539a40e871446514445eeabd49a5fa3abea624f819e9cff70342952a7"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "intent_router",
+      "address": "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o",
+      "codeHash": "0x21b3ec4389374d588bfb17180138dfbf4ce58558cbecaa96d0f110dfd36250ff",
+      "metadataHash": "0xb8b1cec80d7a8182e875252f61cf1522499a0eb70047ccd145ff30f0c718528e",
+      "deployTxHash": "0x90ef28d6464ac91fe26de20aa5111069dfb6a9044f8abc23f5e7d3995510e0c6",
+      "deployBlockHash": "0x1dea126236edf8a5246fbf90a7876834f245167b2f12b024761967f2956951d2"
+    }
+  ],
+  "capabilityProbe": {
+    "source": "probe-report.json",
+    "network": "portaldot-testnet",
+    "observedAt": "2026-11-02T13:45:51.571Z",
+    "endpointHost": "test-node-v3.portaldot.dev",
+    "chain": "PortaldotV3 Test",
+    "genesisHash": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "finalizedBlock": {
+      "number": 292475,
+      "hash": "0x11411e2eada4c129d148e190141e7bf17ce7ec9d7f14bc753dc6b4df6f986402"
+    },
+    "runtime": {
+      "spec_name": "portaldot-v3",
+      "spec_version": 3002,
+      "transaction_version": 2
+    },
+    "metadataHash": "0x9403cfae49f4b196cf35a6982c3176ba3434f48df1c7b7cc4a90238e40d2f46e",
+    "capabilities": {
+      "contractsModule": true,
+      "dryRunApi": true,
+      "uploadCall": true,
+      "instantiateCall": true,
+      "eventQueries": true
+    }
+  },
+  "runs": [],
+  "poolSnapshots": [],
+  "transactions": [],
+  "performance": {
+    "dryRun": {
+      "sampleCount": 0,
+      "minMs": null,
+      "averageMs": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "maxMs": null
+    },
+    "submission": {
+      "sampleCount": 0,
+      "minMs": null,
+      "averageMs": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "maxMs": null
+    },
+    "ready": false
+  },
+  "acceptance": {
+    "status": "incomplete",
+    "requirements": {
+      "deploymentManifest": {
+        "passed": true,
+        "count": 5
+      },
+      "readOnlyCapabilityProbe": {
+        "passed": true
+      },
+      "finalizedTestnetTransactions": {
+        "passed": false,
+        "count": 0,
+        "required": 10,
+        "totalFinalizedRecords": 0
+      },
+      "measuredPerformance": {
+        "passed": false,
+        "dryRunSamples": 0,
+        "submissionSamples": 0
+      },
+      "reproducibleContext": {
+        "passed": false
+      }
+    },
+    "gaps": [
+      "成功的测试网 finalized 交易为 0/10",
+      "缺少 dry-run 或提交耗时样本",
+      "缺少包含 runtime、区块范围和机器配置的运行记录"
+    ]
+  }
+}

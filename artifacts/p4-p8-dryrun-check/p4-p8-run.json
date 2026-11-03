@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T03:18:37.369Z",
+  "network": "portaldot-testnet",
+  "endpointHost": "test-node-v3.portaldot.dev",
+  "mode": "dry-run",
+  "runtime": {
+    "spec_name": "portaldot-v3",
+    "spec_version": 3002,
+    "transaction_version": 2
+  },
+  "runtimeMetadataHash": "0x0087901ae42fa306c5de5a58f10a16a13fe2dc71a49b7245b5788685403f707e",
+  "deploymentPath": "evidence\\p3\\p2-live-preflight-v2.json",
+  "databasePath": "data\\p4-p8-dryrun-check.sqlite3",
+  "run": {
+    "run_id": "p4-p8-1793675892627",
+    "network": "portaldot-testnet",
+    "runtime_version": "portaldot-v3/3002/tx2",
+    "start_block": 300544,
+    "end_block": 300548,
+    "start_block_hash": "0x22cae090620f236d66a5949d14681f896bd1b60a87b94672854d064f17bf858d",
+    "end_block_hash": "0xac848c4387a1fc20c2a63c2d96814751f83d0931716c189515483cb3d90e8395",
+    "code_revision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+    "machine_profile": "win32/x64/node-24.19.0",
+    "created_at_ms": 1793675892715
+  },
+  "counts": {
+    "successful": 0,
+    "rejected": 0,
+    "simulated": 6
+  },
+  "cases": [
+    {
+      "label": "single-hop-success",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300544,
+      "failureReason": "createType(InkPrimitivesLangError):: Unable to create Enum via index 14, in __Unused0, CouldNotReadInput",
+      "hops": 1,
+      "routeHash": "0x75ec2483c3b7e200cf608bb30308aceaacd8c46347bd2e046967b50a08569796"
+    },
+    {
+      "label": "slippage-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300545,
+      "failureReason": "SlippageExceeded",
+      "hops": 1,
+      "routeHash": "0xad94dde6a0543d738f629f832fa503a102e6031a3721d627a2e99170dd72e36d"
+    },
+    {
+      "label": "fee-limit-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300546,
+      "failureReason": "FeeLimitExceeded",
+      "hops": 1,
+      "routeHash": "0x58deb39d84fb7a6434e741e1be450e9c283dd812a75496a460b4e3f0167552fd"
+    },
+    {
+      "label": "deadline-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300547,
+      "failureReason": "InvalidDeadline",
+      "hops": 1,
+      "routeHash": "0x44bdc3bfa1cbb0f253454e8118e7d1a5debc24d3e88d8950389375283871a7c4"
+    },
+    {
+      "label": "invalid-route-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300548,
+      "failureReason": "InvalidAssetPair",
+      "hops": 2,
+      "routeHash": "0x8c8a592ae661f99371f525385724f53466481e477067fea5339a3f067433f606"
+    },
+    {
+      "label": "zero-amount-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300548,
+      "failureReason": "InvalidAmount",
+      "hops": 1,
+      "routeHash": "0x671b09164c529fad7a12b421f6cde7f22ee30a85da17929c0a6af564a66844f0"
+    }
+  ]
+}

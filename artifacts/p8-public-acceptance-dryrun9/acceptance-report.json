@@ -1,0 +1,332 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T02:25:19.133Z",
+  "network": "portaldot-testnet",
+  "explorer": "https://node-console.portaldot.dev/",
+  "source": {
+    "database": "SQLite evidence store",
+    "p3DeploymentReport": "evidence\\p3\\p2-live-preflight-v2.json",
+    "p3DeploymentTransactions": 19,
+    "transactionRecords": 0,
+    "successfulFinalizedTransactions": 0
+  },
+  "gitRevision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+  "deployments": [
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "token_a",
+      "address": "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "codeHash": "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5",
+      "metadataHash": "0x80789771cc96a5f6fe8ecf4976107ee43ab9be7eafb0fbf48a2f4aae1f022289",
+      "deployTxHash": "0x6add00b1cb1c46744bcea49d688d4a2708f095bebf94e1e4067b48205b6effe6",
+      "deployBlockHash": "0x4443b8a74524086d963b4de1bdbc3ecb476d81ee8a3afb4e8334477d1484a4d0"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "token_b",
+      "address": "5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "codeHash": "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5",
+      "metadataHash": "0x80789771cc96a5f6fe8ecf4976107ee43ab9be7eafb0fbf48a2f4aae1f022289",
+      "deployTxHash": "0x5e41242d3c2e63271da6cd2be61fa51c00a457049d13c185ad11461ffaa23bcd",
+      "deployBlockHash": "0x0678598cf74f0dc9ebdfa81da570a07517ad04cff71fc87c268543dd7aea2efe"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "pool_a",
+      "address": "5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx",
+      "codeHash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa",
+      "metadataHash": "0x249126089c7235a14c87a2cde0529967a4be2c227fa5d57bc3aed20c55153dd6",
+      "deployTxHash": "0x3fb6d6d3bb3a8ae3182df26467dab66801150dd907a0edfcce07132bdfaabc80",
+      "deployBlockHash": "0x6fcabb4ff500764dc074533c741d2fae1a4fc86f0eba6bfacc6e7d9ef28ac5b8"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "pool_b",
+      "address": "5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7",
+      "codeHash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa",
+      "metadataHash": "0x249126089c7235a14c87a2cde0529967a4be2c227fa5d57bc3aed20c55153dd6",
+      "deployTxHash": "0x91a0172d41d4706aff234c1cb79dd64203ca28ece26e91912cd4f40892dfd672",
+      "deployBlockHash": "0x1787cbc539a40e871446514445eeabd49a5fa3abea624f819e9cff70342952a7"
+    },
+    {
+      "network": "portaldot-testnet",
+      "contractKind": "intent_router",
+      "address": "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o",
+      "codeHash": "0x21b3ec4389374d588bfb17180138dfbf4ce58558cbecaa96d0f110dfd36250ff",
+      "metadataHash": "0xb8b1cec80d7a8182e875252f61cf1522499a0eb70047ccd145ff30f0c718528e",
+      "deployTxHash": "0x90ef28d6464ac91fe26de20aa5111069dfb6a9044f8abc23f5e7d3995510e0c6",
+      "deployBlockHash": "0x1dea126236edf8a5246fbf90a7876834f245167b2f12b024761967f2956951d2"
+    }
+  ],
+  "deploymentTransactions": [
+    {
+      "network": "portaldot-testnet",
+      "kind": "code_upload_token",
+      "txHash": "0x9f3c5476c44ceaaf850db7e09903d2804540481a7d8cc260c652b6083dc27e65",
+      "blockHash": "0xc582c9196b15056f01369ee8203bcbd7188e188a5e2c48b69c4efbcbd7f74127",
+      "contract": "",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "code_upload_pool",
+      "txHash": "0xeaddb777cd7cd72a36b27efa5ecf8b864783ceb8acafc10cbbf3440f625cb5ac",
+      "blockHash": "0x4fcebce6fc84553b2f1436a67549feb9e3791de6fe2b7d356198deb3c35dc6db",
+      "contract": "",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "code_upload_intent_router",
+      "txHash": "0x2a4135f580c38fc6b5ebdf163db9dda8179e8f1d9726987afca0e7cdb8af03a2",
+      "blockHash": "0x554718cd85c53868c70220aabe2444806335e5f31af716af2f10690d66915378",
+      "contract": "",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "deployment_token_a",
+      "txHash": "0x6add00b1cb1c46744bcea49d688d4a2708f095bebf94e1e4067b48205b6effe6",
+      "blockHash": "0x4443b8a74524086d963b4de1bdbc3ecb476d81ee8a3afb4e8334477d1484a4d0",
+      "contract": "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "deployment_token_b",
+      "txHash": "0x5e41242d3c2e63271da6cd2be61fa51c00a457049d13c185ad11461ffaa23bcd",
+      "blockHash": "0x0678598cf74f0dc9ebdfa81da570a07517ad04cff71fc87c268543dd7aea2efe",
+      "contract": "5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "deployment_pool_a",
+      "txHash": "0x3fb6d6d3bb3a8ae3182df26467dab66801150dd907a0edfcce07132bdfaabc80",
+      "blockHash": "0x6fcabb4ff500764dc074533c741d2fae1a4fc86f0eba6bfacc6e7d9ef28ac5b8",
+      "contract": "5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "deployment_pool_b",
+      "txHash": "0x91a0172d41d4706aff234c1cb79dd64203ca28ece26e91912cd4f40892dfd672",
+      "blockHash": "0x1787cbc539a40e871446514445eeabd49a5fa3abea624f819e9cff70342952a7",
+      "contract": "5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "deployment_intent_router",
+      "txHash": "0x90ef28d6464ac91fe26de20aa5111069dfb6a9044f8abc23f5e7d3995510e0c6",
+      "blockHash": "0x1dea126236edf8a5246fbf90a7876834f245167b2f12b024761967f2956951d2",
+      "contract": "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "router_allow_pool_a",
+      "txHash": "0x9222bc95faf8767992b5314febdd6fe6492f3632e2ded80045ebff280e07a57a",
+      "blockHash": "0x8ec520649fcb1ffb7b21a78421e798c6ddc6294b85aa9eb7abf5176a1ee3f436",
+      "contract": "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o",
+      "message": "set_pool_allowed"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "router_allow_pool_b",
+      "txHash": "0xd9437fa882ce4bcc795dd621a25bbbff4f1fdc9aeb2dfa20bb12cc5d88e20b43",
+      "blockHash": "0x84b752dd68a867a5735ada2c0ce23a59ddf9663faf45d3474bc2898dc1b5c9c1",
+      "contract": "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o",
+      "message": "set_pool_allowed"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "router_authorize_deployer",
+      "txHash": "0x0772f600f520d12bd28e76137ca9036b77f865c6d323536246b3b54b520e61e1",
+      "blockHash": "0x06b66da397b302fc06dfb48e66346be0b529dd5faf26bd3864cffe251b4a131a",
+      "contract": "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o",
+      "message": "set_solver_authorized"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "pool_a_approve_token_a",
+      "txHash": "0xb0726b648d04f90c38830f74476b41aab26613014c5b647b0ffbf3e007550cd2",
+      "blockHash": "0xbd9621101ccc3cdeefbaac1ca74e511016b7a7b965024834cf22de76040ff1f0",
+      "contract": "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "message": "approve"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "pool_a_approve_token_b",
+      "txHash": "0x637e2060496e66c0e453fa894db1fafec27866d09d8f8f1ec5b576c8cbccdb14",
+      "blockHash": "0xf48af4c859eaad091ba1a374b9c86f7144e65256bf0ca735b9ec4353b04b8770",
+      "contract": "5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "message": "approve"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "pool_b_approve_token_a",
+      "txHash": "0x953990155fedc5823baeefd81aa8784111fb064730f6f1dba20329fff5d25104",
+      "blockHash": "0xb606a7a65e60979a7e8dfb47c9ef3bf4b637a34828e7dd340e2e000a8784bcaa",
+      "contract": "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "message": "approve"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "pool_b_approve_token_b",
+      "txHash": "0x4b026a0c5463c8e47be0f853831c18d780376b719cb24469620d3590d78b1851",
+      "blockHash": "0x1e09bf722f39d1742b78012a99ed68f0669432e2f72079cfdba0260a1bbf0fc2",
+      "contract": "5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "message": "approve"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "pool_a_add_liquidity",
+      "txHash": "0x5cd82154ded3e220e99ab37e14437c0d681f51bb17a10559949ad60386c8b808",
+      "blockHash": "0xc84bc176a66fadd8973bd4c2bcfcc3a510f57de89eed16ee8dbaba2862e0a7ab",
+      "contract": "5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx",
+      "message": "add_liquidity"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "pool_b_add_liquidity",
+      "txHash": "0xec7f31fe9b69e17e42764e41828a4205f89f9db3aa9d0a6eba56b83ebcbdfce6",
+      "blockHash": "0xb6668023d6b4f02b3d31e11bff3027280f0f5a69cd82d77858a0ef6b603649c7",
+      "contract": "5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7",
+      "message": "add_liquidity"
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "acceptance_swap_approval",
+      "txHash": "0xb284a085b72392b3489d6b3f34eaa8d6794f73ac41161db23c01f01e84a61567",
+      "blockHash": "0x92bb037af562813d045faaf5bd1461547029bd2c54898e49d10a332fd4598cc8",
+      "contract": "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "message": ""
+    },
+    {
+      "network": "portaldot-testnet",
+      "kind": "acceptance_swap",
+      "txHash": "0xaab258fbadfec8aae1d4f875950a6703541f6eb8b8a50c12f4ad25bff2bdb57b",
+      "blockHash": "0xd608d1d50c082a1032953154fb27fb7674721d9e979be4c73d8eec2249c3f64f",
+      "contract": "",
+      "message": ""
+    }
+  ],
+  "capabilityProbe": {
+    "source": "probe-report.json",
+    "network": "portaldot-testnet",
+    "observedAt": "2026-11-02T15:56:24.534Z",
+    "endpointHost": "test-node-v3.portaldot.dev",
+    "chain": "PortaldotV3 Test",
+    "genesisHash": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+    "finalizedBlock": {
+      "number": 293774,
+      "hash": "0x2ecd0a68f056b8483b03226360a0f7dfd74e5060d335ff029a8a31ecdd267160"
+    },
+    "runtime": {
+      "spec_name": "portaldot-v3",
+      "spec_version": 3002,
+      "transaction_version": 2
+    },
+    "metadataHash": "0x00872deac39faf905504852efd828439c6d76561dbbf7e59a013bb652d771d62",
+    "capabilities": {
+      "contractsModule": true,
+      "dryRunApi": true,
+      "uploadCall": true,
+      "instantiateCall": true,
+      "eventQueries": true
+    }
+  },
+  "runs": [
+    {
+      "runId": "p4-p8-1793672624037",
+      "network": "portaldot-testnet",
+      "runtimeVersion": "portaldot-v3/3002/tx2",
+      "blockRange": {
+        "start": 299999,
+        "end": 300004
+      },
+      "startBlockHash": "0x277d673b046f0f6a0623e128e9aebae70b7a0748f805275bccc12aa73ab596c6",
+      "endBlockHash": "0x94de474e83459c2ff9134af150ae2cbff7d32fcedc59abb8b578da8f0586ffc4",
+      "codeRevision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+      "machineProfile": "win32/x64/node-24.19.0",
+      "createdAtMs": 1793672624239
+    }
+  ],
+  "poolSnapshots": [
+    {
+      "network": "portaldot-testnet",
+      "poolAddress": "0x5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx",
+      "asset0": "0x5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "asset1": "0x5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "reserve0": "0x00000000000000000ddd2cd6b51788e1",
+      "reserve1": "0x00000000000000000de444324c2a8000",
+      "feeBps": 30,
+      "observedBlock": 300003,
+      "observedBlockHash": "0x9454bb2226c201ae1387c0c94734290246cdfa6dca46b79648765dec44492afa",
+      "codeHash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa"
+    },
+    {
+      "network": "portaldot-testnet",
+      "poolAddress": "0x5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7",
+      "asset0": "0x5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP",
+      "asset1": "0x5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV",
+      "reserve0": "0x00000000000000000f43fc2c04ee0000",
+      "reserve1": "0x00000000000000000de0b6b3a7640000",
+      "feeBps": 30,
+      "observedBlock": 300003,
+      "observedBlockHash": "0x9454bb2226c201ae1387c0c94734290246cdfa6dca46b79648765dec44492afa",
+      "codeHash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa"
+    }
+  ],
+  "transactions": [],
+  "performance": {
+    "dryRun": {
+      "sampleCount": 5,
+      "minMs": 385,
+      "averageMs": 395,
+      "p50Ms": 392,
+      "p95Ms": 411,
+      "maxMs": 411
+    },
+    "submission": {
+      "sampleCount": 0,
+      "minMs": null,
+      "averageMs": null,
+      "p50Ms": null,
+      "p95Ms": null,
+      "maxMs": null
+    },
+    "ready": false
+  },
+  "acceptance": {
+    "status": "incomplete",
+    "requirements": {
+      "deploymentManifest": {
+        "passed": true,
+        "count": 5
+      },
+      "readOnlyCapabilityProbe": {
+        "passed": true
+      },
+      "finalizedTestnetTransactions": {
+        "passed": false,
+        "count": 0,
+        "required": 10,
+        "totalFinalizedRecords": 0
+      },
+      "measuredPerformance": {
+        "passed": false,
+        "dryRunSamples": 5,
+        "submissionSamples": 0
+      },
+      "reproducibleContext": {
+        "passed": true
+      }
+    },
+    "gaps": [
+      "成功的测试网 finalized 交易为 0/10",
+      "缺少 dry-run 或提交耗时样本"
+    ]
+  }
+}

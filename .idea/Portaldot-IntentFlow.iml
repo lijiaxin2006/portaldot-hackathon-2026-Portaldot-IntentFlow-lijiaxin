@@ -12,6 +12,8 @@
       <sourceFolder url="file://$MODULE_DIR$/contracts/p2-interface/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/crates/portaldot-config/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/crates/portaldot-config/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/cross-chain-simulator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/portaldot-solver/examples" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

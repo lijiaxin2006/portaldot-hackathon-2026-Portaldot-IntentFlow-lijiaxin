@@ -92,7 +92,7 @@ pub fn enumerate_routes(
     max_hops: usize,
 ) -> Result<Vec<Route>, RouteError> {
     graph.validate()?;
-    if asset_in == asset_out || max_hops == 0 {
+    if max_hops == 0 {
         return Err(RouteError::InvalidRoute);
     }
     if max_hops > 2 {

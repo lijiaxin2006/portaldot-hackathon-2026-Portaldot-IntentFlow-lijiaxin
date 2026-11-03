@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "source": "read_only_rpc_metadata",
+  "network": "portaldot-testnet",
+  "endpointHost": "test-node-v3.portaldot.dev",
+  "observedAt": "2026-11-03T15:02:06.047Z",
+  "chain": "PortaldotV3 Test",
+  "genesisHash": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd",
+  "finalizedBlock": {
+    "number": 307545,
+    "hash": "0x2f90d067c88d9dd8ea5d3f83308001de0cdddab816c1fc16235173c132d0bb61"
+  },
+  "runtime": {
+    "spec_name": "portaldot-v3",
+    "spec_version": 3002,
+    "transaction_version": 2
+  },
+  "metadataHash": "e8d19537dc9824c1bd5d8e441397c2cd30b4ad8cde8f3bf010dfae469d2f92e7",
+  "capabilities": {
+    "contractsModule": true,
+    "dryRunApi": true,
+    "uploadCall": true,
+    "instantiateCall": true,
+    "eventQueries": true
+  }
+}

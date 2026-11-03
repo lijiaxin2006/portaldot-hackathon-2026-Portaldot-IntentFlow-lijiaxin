@@ -88,6 +88,7 @@ pub struct InkAmmPoolAdapter<C> {
     chain: Arc<C>,
     origin: AccountId,
     abi: AmmPoolAbi,
+    expected_code_hash: Option<Hash>,
 }
 
 #[derive(Clone, Debug)]
@@ -175,7 +176,16 @@ impl<C> InkAmmPoolAdapter<C> {
             chain,
             origin,
             abi: AmmPoolAbi::from_bundle(bundle_path)?,
+            expected_code_hash: None,
         })
+    }
+
+    /// Attach the code hash verified from the deployment manifest and runtime
+    /// contract info. This keeps pool snapshots tied to the deployed Wasm.
+    #[must_use]
+    pub fn with_code_hash(mut self, code_hash: Hash) -> Self {
+        self.expected_code_hash = Some(code_hash);
+        self
     }
 }
 
@@ -239,7 +249,7 @@ impl<C: portaldot_client::ChainAdapter> InkAmmPoolAdapter<C> {
             asset_0,
             asset_1,
             fee_bps,
-            code_hash: None,
+            code_hash: self.expected_code_hash,
         })
     }
 }

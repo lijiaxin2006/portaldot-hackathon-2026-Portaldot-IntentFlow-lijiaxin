@@ -13,6 +13,7 @@ evidence-store.workspace = true
 hex.workspace = true
 intentflow-contract-interface = { path = "../../contracts/p2-interface" }
 portaldot-client.workspace = true
+portaldot-dex.workspace = true
 portaldot-solver.workspace = true
 parity-scale-codec.workspace = true
 serde.workspace = true
@@ -20,6 +21,8 @@ serde_json.workspace = true
 sha2.workspace = true
 thiserror.workspace = true
 tracing.workspace = true
+sp-core.workspace = true
+tokio.workspace = true
 
 [lints]
 workspace = true

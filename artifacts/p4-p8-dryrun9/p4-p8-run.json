@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T02:24:02.386Z",
+  "network": "portaldot-testnet",
+  "endpointHost": "test-node-v3.portaldot.dev",
+  "mode": "dry-run",
+  "runtime": {
+    "spec_name": "portaldot-v3",
+    "spec_version": 3002,
+    "transaction_version": 2
+  },
+  "runtimeMetadataHash": "0xb75df9c23f46b7bebcd8bedd5ab7f7498a0af2366878f0a6704514ef49d1b331",
+  "deploymentPath": "evidence\\p3\\p2-live-preflight-v2.json",
+  "databasePath": "data\\p4-p8-dryrun9.sqlite3",
+  "run": {
+    "run_id": "p4-p8-1793672624037",
+    "network": "portaldot-testnet",
+    "runtime_version": "portaldot-v3/3002/tx2",
+    "start_block": 299999,
+    "end_block": 300004,
+    "start_block_hash": "0x277d673b046f0f6a0623e128e9aebae70b7a0748f805275bccc12aa73ab596c6",
+    "end_block_hash": "0x94de474e83459c2ff9134af150ae2cbff7d32fcedc59abb8b578da8f0586ffc4",
+    "code_revision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+    "machine_profile": "win32/x64/node-24.19.0",
+    "created_at_ms": 1793672624239
+  },
+  "counts": {
+    "successful": 0,
+    "rejected": 0,
+    "simulated": 5
+  },
+  "cases": [
+    {
+      "label": "single-hop-success",
+      "success": true,
+      "txHash": null,
+      "blockNumber": 300001,
+      "failureReason": null,
+      "hops": 1,
+      "routeHash": "0x09bf9b85fff8daf329d81e11a847e03564b4960cbfd1c62f6a67ca1a53aac6c6"
+    },
+    {
+      "label": "slippage-protection",
+      "success": true,
+      "txHash": null,
+      "blockNumber": 300002,
+      "failureReason": null,
+      "hops": 1,
+      "routeHash": "0x847e21ff3bb826779e23ef84ce91940681e83c9c56f59cb621169ad9cb40860f"
+    },
+    {
+      "label": "fee-limit-protection",
+      "success": true,
+      "txHash": null,
+      "blockNumber": 300002,
+      "failureReason": null,
+      "hops": 1,
+      "routeHash": "0x847e21ff3bb826779e23ef84ce91940681e83c9c56f59cb621169ad9cb40860f"
+    },
+    {
+      "label": "deadline-protection",
+      "success": true,
+      "txHash": null,
+      "blockNumber": 300002,
+      "failureReason": null,
+      "hops": 1,
+      "routeHash": "0x847e21ff3bb826779e23ef84ce91940681e83c9c56f59cb621169ad9cb40860f"
+    },
+    {
+      "label": "invalid-route-protection",
+      "success": true,
+      "txHash": null,
+      "blockNumber": 300003,
+      "failureReason": null,
+      "hops": 2,
+      "routeHash": "0xb72f60f9704ffa400af26358b4a13c01f5a703e23aec0947ad3a8d114cba6419"
+    }
+  ]
+}

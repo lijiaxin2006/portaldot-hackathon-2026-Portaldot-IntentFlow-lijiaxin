@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "p2:deploy": "node scripts/deploy-p2-testnet.mjs",
+    "p4:p8:acceptance": "node scripts/p4-p8-acceptance.mjs",
     "p7:dashboard": "node apps/dashboard/server.mjs",
     "p8:probe": "node scripts/p8-probe-readonly.mjs",
     "p8:acceptance": "node scripts/p8-generate-acceptance.mjs"

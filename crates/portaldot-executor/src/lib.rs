@@ -293,6 +293,29 @@ pub async fn dry_run<A: ChainAdapter, E: IntentRouterEncoder>(
     request: &ExecutionRequest,
     policy: ExecutionPolicy,
 ) -> Result<PreparedSimulation, ExecutionError> {
+    let simulation = dry_run_allow_failure(adapter, encoder, request, policy).await?;
+    if !simulation.result.success {
+        tracing::warn!("IntentRouter dry-run rejected the route");
+        return Err(ExecutionError::DryRunFailed(
+            simulation
+                .result
+                .failure_reason
+                .clone()
+                .unwrap_or_else(|| "unknown failure".to_string()),
+        ));
+    }
+    Ok(simulation)
+}
+
+/// Runs a fixed-block dry-run while preserving an expected rejection. This is
+/// used by the testnet protection suite before deliberately submitting a
+/// reverting transaction for finalized receipt evidence.
+pub async fn dry_run_allow_failure<A: ChainAdapter, E: IntentRouterEncoder>(
+    adapter: &A,
+    encoder: &E,
+    request: &ExecutionRequest,
+    policy: ExecutionPolicy,
+) -> Result<PreparedSimulation, ExecutionError> {
     validate_request(request, policy)?;
     let call = make_call(encoder, request, policy)?;
     tracing::debug!(
@@ -301,28 +324,78 @@ pub async fn dry_run<A: ChainAdapter, E: IntentRouterEncoder>(
     );
     let block = request.route.start_block;
     let result = adapter.dry_run_at(call.clone(), block).await?;
-    if !result.success {
-        tracing::warn!("IntentRouter dry-run rejected the route");
-        return Err(ExecutionError::DryRunFailed(
-            result
-                .failure_reason
-                .clone()
-                .unwrap_or_else(|| "unknown failure".to_string()),
-        ));
+    if result.success {
+        encoder
+            .validate_output(&result.output)
+            .map_err(ExecutionError::DryRunFailed)?;
     }
-    encoder
-        .validate_output(&result.output)
-        .map_err(ExecutionError::DryRunFailed)?;
     tracing::info!(
+        success = result.success,
         gas_ref_time = result.gas_required.ref_time,
         gas_proof_size = result.gas_required.proof_size,
-        "IntentRouter dry-run passed"
+        "IntentRouter dry-run completed"
     );
     Ok(PreparedSimulation {
         call_hash: fingerprint_call(&call, block),
         block,
         result,
     })
+}
+
+/// Submits a transaction whose dry-run has already established an expected
+/// rejection. This function is intentionally separate from `submit`, whose
+/// safety contract only permits successful dry-runs.
+pub async fn submit_expected_rejection<
+    A: TransactionSubmitter,
+    E: IntentRouterEncoder,
+    S: TransactionSigner,
+>(
+    adapter: &A,
+    encoder: &E,
+    signer: &S,
+    request: &ExecutionRequest,
+    policy: ExecutionPolicy,
+    simulation: &PreparedSimulation,
+) -> Result<TxReceipt, ExecutionError> {
+    if !policy.enabled {
+        return Err(ExecutionError::Disabled);
+    }
+    if !policy.dry_run_required {
+        return Err(ExecutionError::InvalidRequest(
+            "IntentRouter submission cannot disable the dry-run gate".into(),
+        ));
+    }
+    validate_request(request, policy)?;
+    if request.intent.max_fee > policy.max_fee {
+        return Err(ExecutionError::InvalidRequest(
+            "intent fee exceeds execution policy".to_string(),
+        ));
+    }
+    if signer.account_id() != request.solver {
+        return Err(ExecutionError::InvalidRequest(
+            "signer account does not match the requested solver".to_string(),
+        ));
+    }
+    if simulation.result.success {
+        return Err(ExecutionError::InvalidRequest(
+            "expected-rejection submission received a successful dry-run".into(),
+        ));
+    }
+    let call = make_call(encoder, request, policy)?;
+    let block = request.route.start_block;
+    if simulation.block != block || simulation.call_hash != fingerprint_call(&call, block) {
+        return Err(ExecutionError::SimulationMismatch);
+    }
+    let receipt = adapter
+        .submit(call, simulation.result.gas_required, signer)
+        .await
+        .map_err(ExecutionError::from)?;
+    if receipt.success {
+        return Err(ExecutionError::InvalidRequest(
+            "expected-rejection transaction finalized successfully".into(),
+        ));
+    }
+    Ok(receipt)
 }
 
 pub async fn submit<A: TransactionSubmitter, E: IntentRouterEncoder, S: TransactionSigner>(
@@ -501,6 +574,126 @@ pub async fn execute_and_record<
         evidence.execution.event_hash = Some(hash_serialized(&evidence.events)?);
     }
     evidence.failure_reason = receipt.failure_reason.clone();
+    evidence.receipt_hash = Some(hash_serialized(&receipt)?);
+    store.update(evidence).await?;
+    Ok(receipt)
+}
+
+/// Executes and records a deliberately rejected protection case. The call is
+/// dry-run first, then submitted only when the same call is known to revert.
+pub async fn execute_and_record_expected_rejection<
+    A: ChainAdapter + TransactionSubmitter,
+    E: IntentRouterEncoder,
+    S: TransactionSigner,
+    St: EvidenceStore,
+>(
+    adapter: &A,
+    encoder: &E,
+    signer: &S,
+    request: &ExecutionRequest,
+    policy: ExecutionPolicy,
+    store: &St,
+) -> Result<TxReceipt, ExecutionError> {
+    validate_request(request, policy)?;
+    let input_hash = hash_serialized(request)?;
+    let mut evidence = StoredEvidence {
+        execution: ExecutionEvidence {
+            network: request.route.network.clone(),
+            intent_id: request.intent.intent_id,
+            route_hash: request.route.route_hash,
+            commitment_hash: request.commitment_hash,
+            simulation_hash: None,
+            tx_hash: None,
+            block_hash: None,
+            event_hash: None,
+            metadata_hash: None,
+            code_hash: None,
+            status: EvidenceStatus::Planned,
+        },
+        intent: request.intent.clone(),
+        route: request.route.clone(),
+        deployment: None,
+        quote: request.quote.clone(),
+        input_hash,
+        route_hash: request.route.route_hash,
+        simulation_hash: None,
+        receipt_hash: None,
+        simulation: None,
+        receipt: None,
+        events: Vec::new(),
+        failure_reason: None,
+        created_at_ms: now_ms(),
+        simulation_duration_ms: None,
+        submission_duration_ms: None,
+    };
+    store.put(evidence.clone()).await?;
+
+    let simulation_started = Instant::now();
+    let simulation = dry_run_allow_failure(adapter, encoder, request, policy).await?;
+    evidence.simulation_duration_ms = Some(elapsed_ms(simulation_started));
+    evidence.simulation_hash = Some(hash_serialized(&simulation)?);
+    evidence.execution.simulation_hash = evidence.simulation_hash;
+    evidence.execution.status = EvidenceStatus::Rejected;
+    evidence.failure_reason = simulation.result.failure_reason.clone();
+    evidence.simulation = Some(SimulationEvidence {
+        call_hash: simulation.call_hash,
+        block: simulation.block,
+        success: simulation.result.success,
+        gas_required: simulation.result.gas_required,
+        output: simulation.result.output.clone(),
+        events: simulation.result.events.clone(),
+        failure_reason: simulation.result.failure_reason.clone(),
+    });
+    store.update(evidence.clone()).await?;
+
+    let submission_started = Instant::now();
+    let receipt = match submit_expected_rejection(
+        adapter,
+        encoder,
+        signer,
+        request,
+        policy,
+        &simulation,
+    )
+    .await
+    {
+        Ok(receipt) => receipt,
+        Err(error) => {
+            evidence.failure_reason = Some(error.to_string());
+            evidence.submission_duration_ms = Some(elapsed_ms(submission_started));
+            store.update(evidence).await?;
+            return Err(error);
+        }
+    };
+    evidence.submission_duration_ms = Some(elapsed_ms(submission_started));
+    evidence.execution.tx_hash = Some(receipt.tx_hash);
+    evidence.execution.block_hash = Some(receipt.block.hash);
+    evidence.receipt = Some(ReceiptEvidence {
+        tx_hash: receipt.tx_hash,
+        block: receipt.block,
+        extrinsic_index: receipt.extrinsic_index,
+        success: receipt.success,
+        gas_used: receipt.gas_used,
+        failure_reason: receipt.failure_reason.clone(),
+    });
+    evidence.events = receipt
+        .event_records
+        .iter()
+        .map(|event| StoredEvent {
+            pallet: event.pallet.clone(),
+            event: event.event.clone(),
+            block: event.block,
+            extrinsic_index: event.extrinsic_index,
+            event_index: event.event_index,
+            contract: event.contract,
+            topics: event.topics.clone(),
+            data: event.data.clone(),
+        })
+        .collect();
+    if !evidence.events.is_empty() {
+        evidence.execution.event_hash = Some(hash_serialized(&evidence.events)?);
+    }
+    evidence.failure_reason = receipt.failure_reason.clone().or(evidence.failure_reason);
     evidence.receipt_hash = Some(hash_serialized(&receipt)?);
     store.update(evidence).await?;
     Ok(receipt)

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T05:08:49.155Z",
+  "files": [
+    {
+      "path": "acceptance-report.json",
+      "sha256": "c32faf18f8a8b08aed55315246613d37652efbc346287923eb51863c60b33108",
+      "bytes": 201803
+    },
+    {
+      "path": "acceptance-report.md",
+      "sha256": "a9ec19cf8f37a26ea8ebd719f999bbae7cd7bd55ba4155e15cf49eb280fa0d22",
+      "bytes": 12044
+    }
+  ]
+}

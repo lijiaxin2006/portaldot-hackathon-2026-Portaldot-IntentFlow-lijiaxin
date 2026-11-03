@@ -1,13 +1,16 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { dirname, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { executeIntent, getIntentConfig, IntentInputError } from './intent-service.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const publicRoot = resolve(root, 'apps/dashboard/public');
-const databasePath = resolve(root, process.env.INTENTFLOW_EVIDENCE_DB ?? 'data/intentflow.sqlite3');
+const configuredDatabasePath = process.env.INTENTFLOW_EVIDENCE_DB?.trim();
+const defaultDatabasePath = resolve(root, 'data/intentflow.sqlite3');
+const databaseDirectory = resolve(root, 'data');
 const host = '127.0.0.1';
 const port = Number(process.env.PORT ?? '8787');
 const contentTypes = new Map([
@@ -16,9 +19,26 @@ const contentTypes = new Map([
   ['.js', 'text/javascript; charset=utf-8'],
 ]);
 
+function databaseCandidates() {
+  if (configuredDatabasePath) return [resolve(root, configuredDatabasePath)];
+  const preferred = [
+    defaultDatabasePath,
+    resolve(databaseDirectory, 'p4-p8-broadcast-final.sqlite3'),
+  ];
+  const preferredSet = new Set(preferred);
+  if (!existsSync(databaseDirectory)) return preferred;
+  const discovered = readdirSync(databaseDirectory, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.sqlite3'))
+    .map((entry) => resolve(databaseDirectory, entry.name))
+    .filter((path) => !preferredSet.has(path))
+    .sort((left, right) => statSync(right).mtimeMs - statSync(left).mtimeMs);
+  return [...preferred, ...discovered];
+}
+
 function readEvidence(limit = 250) {
-  if (!existsSync(databasePath)) {
-    return { database: 'missing', evidence: [], runs: [], pools: [] };
+  const databasePath = databaseCandidates().find((path) => existsSync(path));
+  if (!databasePath) {
+    return { database: 'missing', databaseFile: null, evidence: [], runs: [], pools: [], deployments: [] };
   }
   let database;
   try {
@@ -36,32 +56,84 @@ function readEvidence(limit = 250) {
     const deployments = database.prepare(
       'SELECT payload_json FROM portaldot_deployments ORDER BY contract_kind',
     ).all().map((row) => JSON.parse(row.payload_json));
-    return { database: 'ready', evidence, runs, pools, deployments };
+    return {
+      database: 'ready',
+      databaseFile: databasePath.startsWith(root) ? databasePath.slice(root.length + 1) : databasePath,
+      evidence,
+      runs,
+      pools,
+      deployments,
+    };
   } catch (error) {
-    return { database: 'unavailable', evidence: [], runs: [], pools: [], deployments: [] };
+    return {
+      database: 'unavailable',
+      databaseFile: databasePath.startsWith(root) ? databasePath.slice(root.length + 1) : databasePath,
+      evidence: [],
+      runs: [],
+      pools: [],
+      deployments: [],
+    };
   } finally {
     database?.close();
   }
 }
 
 function sendJson(response, status, value) {
+  if (response.headersSent || response.writableEnded) return;
   response.writeHead(status, {
     'content-type': 'application/json; charset=utf-8',
     'cache-control': 'no-store',
     'x-content-type-options': 'nosniff',
   });
-  response.end(JSON.stringify(value));
+  response.end(JSON.stringify(value, (_key, item) => (typeof item === 'bigint' ? item.toString() : item)));
+}
+
+async function readJsonBody(request) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > 64 * 1024) throw new IntentInputError('Request body is too large.', 413);
+    chunks.push(chunk);
+  }
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+  } catch {
+    throw new IntentInputError('Request body must be valid JSON.', 400);
+  }
 }
 
 async function handle(request, response) {
   const url = new URL(request.url ?? '/', `http://${host}:${port}`);
+  if (request.method === 'GET' && url.pathname === '/api/intent/config') {
+    try {
+      sendJson(response, 200, await getIntentConfig());
+    } catch (error) {
+      sendJson(response, error.status ?? 503, { error: error.message });
+    }
+    return;
+  }
+  if (request.method === 'POST' && url.pathname === '/api/intents') {
+    try {
+      const result = await executeIntent(await readJsonBody(request));
+      sendJson(response, 200, result);
+    } catch (error) {
+      sendJson(response, error.status ?? 500, { error: error.message ?? 'intent execution failed' });
+    }
+    return;
+  }
   if (request.method !== 'GET') {
     sendJson(response, 405, { error: 'method not allowed' });
     return;
   }
   if (url.pathname === '/api/health') {
     const snapshot = readEvidence(1);
-    sendJson(response, 200, { status: snapshot.database, readOnly: true });
+    sendJson(response, 200, {
+      status: snapshot.database,
+      databaseFile: snapshot.databaseFile,
+      readOnly: false,
+      intentSubmission: true,
+    });
     return;
   }
   if (url.pathname === '/api/overview' || url.pathname === '/api/evidence') {

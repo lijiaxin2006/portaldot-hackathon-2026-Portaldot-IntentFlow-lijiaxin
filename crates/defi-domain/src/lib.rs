@@ -8,6 +8,13 @@
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
+mod cross_chain;
+
+pub use cross_chain::{
+    ChainAssetKind, ChainAssetRef, CrossChainError, CrossChainEventKind, CrossChainIntent,
+    CrossChainMessage, CrossChainReasonCode, CrossChainStatus, CrossChainTransition, transition,
+};
+
 pub const FEE_DENOMINATOR_BPS: u32 = 10_000;
 
 pub type Hash = [u8; 32];
@@ -185,10 +192,7 @@ impl SwapIntent {
         if self.owner.is_zero() {
             return Err(DomainError::ZeroIdentity("owner"));
         }
-        if self.asset_in == self.asset_out
-            || self.asset_in.is_zero_contract()
-            || self.asset_out.is_zero_contract()
-        {
+        if self.asset_in.is_zero_contract() || self.asset_out.is_zero_contract() {
             return Err(DomainError::InvalidAssetPair);
         }
         if self.amount_in == 0 {

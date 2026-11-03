@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "network": "portaldot-testnet",
+  "endpoint_host": "test-node-v3.portaldot.dev",
+  "observed_at_utc": "2026-11-03T13:11:46.187Z",
+  "signer_address_from_environment": true,
+  "signer_account_sha256": "0xb2e2b17743ee75a298ecec4d21c6d2838a29b6ee6032d8343770ae2fedf0a192",
+  "private_signing_material_used": false,
+  "private_signing_material_recorded": false,
+  "plan_path": "config\\p2-testnet-deployment.example.json",
+  "plan_sha256": "0x388cf3b7b85fea378cfa47ba102666a28efe8718aea093d9213275cdbc782571",
+  "resumed_from_report": false,
+  "broadcast_count": 0,
+  "run_broadcast_count": 0,
+  "run_kind": "preflight_only",
+  "status": "failed_or_blocked",
+  "code_uploads": {
+    "token": {
+      "code_hash": "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5",
+      "wasm_sha256": "0xa12734a8ecb5f85c9a9d047693fbc6a4e4ec1187d3ec932b1cff0032bdb9f7c6",
+      "wasm_bytes": 11085,
+      "storage_deposit": "0",
+      "estimated_fee": "0",
+      "status": "pass",
+      "already_uploaded": true
+    },
+    "pool": {
+      "code_hash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa",
+      "wasm_sha256": "0x60bc09e761fd48f246fa04e1570ceb63f30e6a0fa5085ecc1c76546432431a1d",
+      "wasm_bytes": 24949,
+      "storage_deposit": "0",
+      "estimated_fee": "0",
+      "status": "pass",
+      "already_uploaded": true
+    },
+    "intent_router": {
+      "code_hash": "0x21b3ec4389374d588bfb17180138dfbf4ce58558cbecaa96d0f110dfd36250ff",
+      "wasm_sha256": "0x97d8ac1572208739ea810750d1a49d007f986b209deb73e8805a4c2638a6c474",
+      "wasm_bytes": 25192,
+      "storage_deposit": "0",
+      "estimated_fee": "0",
+      "status": "pass",
+      "already_uploaded": true
+    }
+  },
+  "deployments": {},
+  "steps": {},
+  "signer_address_matches_configured_account": null,
+  "runtime": {
+    "spec_name": "portaldot-v3",
+    "spec_version": 3002,
+    "transaction_version": 2,
+    "metadata_sha256": "0x84fe8f8a626e72b7d66d0efc25a528df081704f90aec6f9d27c53a1d25675bf8",
+    "contracts_api_version": 2,
+    "genesis_hash": "0xd4f9acbcf7f52388d8b095abe3c198d19fc510e0343e643e87cfbccb155283bd"
+  },
+  "observed_finalized_block": {
+    "number": 306446,
+    "hash": "0x6029cd2416423da6690ab7e72893d8d9b8e4523a6427faf7529e04f1f3043f05"
+  },
+  "artifacts": {
+    "intentflow_psp22_test_token": {
+      "code_hash": "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5",
+      "wasm_bytes": 11085,
+      "wasm_sha256": "0xa12734a8ecb5f85c9a9d047693fbc6a4e4ec1187d3ec932b1cff0032bdb9f7c6",
+      "bundle_sha256": "0x33ef665b521503845160e47a8076ce150e20904b0c7366ab42606e8d7067cff3",
+      "metadata_sha256": "0x80789771cc96a5f6fe8ecf4976107ee43ab9be7eafb0fbf48a2f4aae1f022289"
+    },
+    "intentflow_amm_pool": {
+      "code_hash": "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa",
+      "wasm_bytes": 24949,
+      "wasm_sha256": "0x60bc09e761fd48f246fa04e1570ceb63f30e6a0fa5085ecc1c76546432431a1d",
+      "bundle_sha256": "0xdd4aaf8a707f73446107a6f1f63e83676749af3ef1bbff3f745a268c3f4716f1",
+      "metadata_sha256": "0x249126089c7235a14c87a2cde0529967a4be2c227fa5d57bc3aed20c55153dd6"
+    },
+    "intentflow_intent_router": {
+      "code_hash": "0x21b3ec4389374d588bfb17180138dfbf4ce58558cbecaa96d0f110dfd36250ff",
+      "wasm_bytes": 25192,
+      "wasm_sha256": "0x97d8ac1572208739ea810750d1a49d007f986b209deb73e8805a4c2638a6c474",
+      "bundle_sha256": "0x0ca7cb84a9da55160410a790f43f3da3086fa6c4389b2db46057e6992fd9504b",
+      "metadata_sha256": "0xb8b1cec80d7a8182e875252f61cf1522499a0eb70047ccd145ff30f0c718528e"
+    }
+  },
+  "fee_preflight": {
+    "account_free_balance": "5467850983600470",
+    "deposit_per_byte": "6000000000000",
+    "unique_code_bytes": 61226,
+    "new_code_storage_deposits": {
+      "0x89d7e0f4e8bb22b51ed3d3e214f875f4fee734861b5d625969436bf0c55cfbd5": "0",
+      "0x942348f282c7fb3b0bb14c978337cefd35642977588d149d232f5508f1666dfa": "0",
+      "0x21b3ec4389374d588bfb17180138dfbf4ce58558cbecaa96d0f110dfd36250ff": "0"
+    },
+    "new_code_storage_deposit_estimate": "0",
+    "balance_after_new_code_storage_estimate": "5467850983600470",
+    "estimate_note": "Assumes each unique code hash must be stored; excludes contract state deposits and transaction fees."
+  },
+  "failure": {
+    "stage": "deploy_preflight",
+    "message": "token_a constructor dry-run failed: contracts.DuplicateContract."
+  },
+  "completed_at_utc": "2026-11-03T13:11:56.642Z"
+}

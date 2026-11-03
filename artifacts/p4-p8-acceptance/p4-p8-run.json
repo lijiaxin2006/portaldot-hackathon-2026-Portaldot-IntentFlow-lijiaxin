@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T13:17:36.652Z",
+  "network": "portaldot-testnet",
+  "endpointHost": "test-node-v3.portaldot.dev",
+  "mode": "dry-run",
+  "runtime": {
+    "spec_name": "portaldot-v3",
+    "spec_version": 3002,
+    "transaction_version": 2
+  },
+  "runtimeMetadataHash": "0x57caab3380b702d0e8f5947275af44037eb65d31e157f5bef17f556823abf300",
+  "deploymentPath": "evidence\\p3\\p2-live-preflight-v2.json",
+  "databasePath": "artifacts\\account-dry-run.sqlite3",
+  "run": {
+    "run_id": "p4-p8-1793711828272",
+    "network": "portaldot-testnet",
+    "runtime_version": "portaldot-v3/3002/tx2",
+    "start_block": 306498,
+    "end_block": 306503,
+    "start_block_hash": "0x142b4b570bb0fa011ff65341d8eb564156cacd458073dc51f3f7d0a8bd5cd31d",
+    "end_block_hash": "0xdb2d3fcf47d39869f0906440974325ad4ea9841d50adb97f0d195f039ed32175",
+    "code_revision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+    "machine_profile": "win32/x64/node-24.19.0",
+    "created_at_ms": 1793711828363
+  },
+  "counts": {
+    "successful": 0,
+    "rejected": 0,
+    "simulated": 6
+  },
+  "cases": [
+    {
+      "label": "single-hop-success",
+      "success": true,
+      "txHash": null,
+      "blockNumber": 306499,
+      "failureReason": null,
+      "hops": 1,
+      "routeHash": "0x68c88b53834fea9285521d696e219355672134e449bc8ab69b571f69c481e4b6"
+    },
+    {
+      "label": "slippage-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 306500,
+      "failureReason": "SlippageExceeded",
+      "hops": 1,
+      "routeHash": "0xb1d5d28d4c7a3a711e902b5e309c8fdf926df04ff4cee8294bae81a3d436585d"
+    },
+    {
+      "label": "fee-limit-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 306501,
+      "failureReason": "FeeLimitExceeded",
+      "hops": 1,
+      "routeHash": "0xb0dcd983e0aa86f07c21b91ab99a43e50466d09c8777b14d0457d45b04c54295"
+    },
+    {
+      "label": "deadline-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 306501,
+      "failureReason": "InvalidDeadline",
+      "hops": 1,
+      "routeHash": "0xb0dcd983e0aa86f07c21b91ab99a43e50466d09c8777b14d0457d45b04c54295"
+    },
+    {
+      "label": "invalid-route-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 306502,
+      "failureReason": "InvalidAssetPair",
+      "hops": 2,
+      "routeHash": "0x32c7c345b4a8b35ecaae5ab836f4a90070f039253398719ce8ec6b9e6a08ec15"
+    },
+    {
+      "label": "zero-amount-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 306503,
+      "failureReason": "InvalidAmount",
+      "hops": 1,
+      "routeHash": "0x000fdc4b2268dc35e3350cb220ffe1eeb73899739f552ce93dbc57c7c493d2ae"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-03T02:39:31.051Z",
+  "network": "portaldot-testnet",
+  "endpointHost": "test-node-v3.portaldot.dev",
+  "mode": "dry-run",
+  "runtime": {
+    "spec_name": "portaldot-v3",
+    "spec_version": 3002,
+    "transaction_version": 2
+  },
+  "runtimeMetadataHash": "0x85e7da764d3c6dbe7a8103ab934f8237d6002b918e8d32c090fb87da9ca246df",
+  "deploymentPath": "evidence\\p3\\p2-live-preflight-v2.json",
+  "databasePath": "data\\p4-p8-dryrun11.sqlite3",
+  "run": {
+    "run_id": "p4-p8-1793673552630",
+    "network": "portaldot-testnet",
+    "runtime_version": "portaldot-v3/3002/tx2",
+    "start_block": 300154,
+    "end_block": 300158,
+    "start_block_hash": "0x079330db95754c35a30321d117473a9fcd95d26a4c37abfb65fd99de7ac0f6e2",
+    "end_block_hash": "0x31347723a55efc2cc68b491a223fe319116e671628839098231e1a7c96c94d85",
+    "code_revision": "3fc15c4dd7c511feca45b61bd3e545f8625d5ae6",
+    "machine_profile": "win32/x64/node-24.19.0",
+    "created_at_ms": 1793673552759
+  },
+  "counts": {
+    "successful": 0,
+    "rejected": 0,
+    "simulated": 5
+  },
+  "cases": [
+    {
+      "label": "single-hop-success",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300156,
+      "failureReason": "createType(Result<Result<IntentflowContractInterfaceExecutionResult, IntentflowContractInterfaceContractError>, InkPrimitivesLangError>):: Unable to create Enum via index 14, in __Unused0, CouldNotReadInput",
+      "hops": 1,
+      "routeHash": "0x9d4e350901b0f92bdf43da40c86eb24c951a0db29a08e83d0e72d7a11dfd4e4f"
+    },
+    {
+      "label": "slippage-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300156,
+      "failureReason": "SlippageExceeded",
+      "hops": 1,
+      "routeHash": "0x9d4e350901b0f92bdf43da40c86eb24c951a0db29a08e83d0e72d7a11dfd4e4f"
+    },
+    {
+      "label": "fee-limit-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300156,
+      "failureReason": "FeeLimitExceeded",
+      "hops": 1,
+      "routeHash": "0x9d4e350901b0f92bdf43da40c86eb24c951a0db29a08e83d0e72d7a11dfd4e4f"
+    },
+    {
+      "label": "deadline-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300157,
+      "failureReason": "InvalidDeadline",
+      "hops": 1,
+      "routeHash": "0xa4f16109a80e818efba798db184f43330fd16ea15eeb066e2dbec90451f40569"
+    },
+    {
+      "label": "invalid-route-protection",
+      "success": false,
+      "txHash": null,
+      "blockNumber": 300158,
+      "failureReason": "InvalidAssetPair",
+      "hops": 2,
+      "routeHash": "0x347b4cb0256a6e50e1c613114e0cbce6f0f0a5a8ba6342bc6f388e20acc5a90f"
+    }
+  ]
+}

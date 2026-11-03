@@ -3,80 +3,106 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light">
-    <title>Portaldot IntentFlow | 运行面板</title>
+    <meta name="color-scheme" content="dark">
+    <title>Portaldot IntentFlow | Dashboard</title>
     <link rel="stylesheet" href="/styles.css">
     <script type="module" src="/app.js"></script>
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="/" aria-label="Portaldot IntentFlow 运行面板">
+      <a class="brand" href="/" aria-label="Portaldot IntentFlow Dashboard">
         <span class="brand-mark" aria-hidden="true">IF</span>
-        <span><strong>IntentFlow</strong><small>Portaldot 测试网</small></span>
+        <span><strong>IntentFlow</strong><small>Portaldot Testnet</small></span>
       </a>
       <div class="topbar-actions">
-        <span id="updated-at" class="muted">等待数据</span>
-        <a class="button secondary" href="https://node-console.portaldot.dev/" target="_blank" rel="noreferrer">节点浏览器 ↗</a>
-        <button id="refresh" class="button primary" type="button">刷新</button>
+        <span id="updated-at" class="muted" role="status" aria-live="polite">Waiting for data</span>
+        <a class="button secondary" href="https://node-console.portaldot.dev/" target="_blank" rel="noreferrer">Node Explorer ↗</a>
+        <button id="refresh" class="button primary" type="button">Refresh</button>
       </div>
     </header>
 
-    <main>
+    <main aria-busy="true">
       <section class="page-heading">
         <div>
-          <p class="eyebrow">运维 / 证据</p>
-          <h1>运行面板</h1>
+          <p class="eyebrow">OPERATIONS / EVIDENCE</p>
+          <h1>Dashboard</h1>
         </div>
-        <p id="database-state" class="state-line">正在读取本地证据库</p>
+        <p id="database-state" class="state-line" role="status" aria-live="polite">Reading local evidence store</p>
       </section>
 
-      <section class="metrics" aria-label="运行摘要">
-        <div class="metric"><span>最新运行</span><strong id="metric-run">未采集</strong><small id="metric-runtime">runtime 信息未采集</small></div>
-        <div class="metric"><span>池快照</span><strong id="metric-pools">0</strong><small>来自已保存的区块快照</small></div>
-        <div class="metric"><span>执行证据</span><strong id="metric-evidence">0</strong><small id="metric-status">没有已确认交易</small></div>
-        <div class="metric"><span>本地模拟耗时</span><strong id="metric-latency">--</strong><small>仅统计真实保存样本</small></div>
+      <section class="metrics" aria-label="Run summary">
+        <div class="metric"><span>Latest Run</span><strong id="metric-run">Not collected</strong><small id="metric-runtime">Runtime information not collected</small></div>
+        <div class="metric"><span>Pool Snapshots</span><strong id="metric-pools">0</strong><small>From saved block snapshots</small></div>
+        <div class="metric"><span>Execution Evidence</span><strong id="metric-evidence">0</strong><small id="metric-status">No confirmed transactions</small></div>
+        <div class="metric"><span>Local Simulation Latency</span><strong id="metric-latency">--</strong><small>Saved samples only</small></div>
+      </section>
+
+      <section class="section-block intent-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">USER INTENT</p><h2>Submit a swap intent</h2></div>
+          <span id="intent-owner" class="muted">Loading account</span>
+        </div>
+        <form id="intent-form" class="intent-form">
+          <div class="intent-fields">
+            <label>Input asset<select id="intent-asset-in" name="assetIn" required></select></label>
+            <label>Output asset<select id="intent-asset-out" name="assetOut" required></select></label>
+            <label>Input amount<input id="intent-amount-in" name="amountIn" inputmode="numeric" pattern="[0-9]+" value="1000000000000" required></label>
+            <label>Minimum output<input id="intent-amount-out-min" name="amountOutMin" inputmode="numeric" pattern="[0-9]+" value="0" required></label>
+            <label>Maximum fee<input id="intent-max-fee" name="maxFee" inputmode="numeric" pattern="[0-9]+" value="10000000000000" required></label>
+            <label>Deadline block<input id="intent-deadline" name="deadline" inputmode="numeric" pattern="[0-9]+" placeholder="Current block + 8"></label>
+            <label>Maximum hops<select id="intent-max-hops" name="maxHops"><option value="1">1 hop</option><option value="2" selected>Up to 2 hops</option></select></label>
+          </div>
+          <div class="intent-actions">
+            <label class="toggle"><input id="intent-broadcast" name="broadcast" type="checkbox"><span>Broadcast after successful dry-run</span></label>
+            <button id="intent-submit" class="button primary" type="submit">Submit intent</button>
+          </div>
+          <p id="intent-help" class="form-help">Dry-run is the default. Enter 0 minimum output to inspect the current quote first.</p>
+          <div id="intent-result" class="intent-result" role="status" aria-live="polite" hidden></div>
+        </form>
       </section>
 
       <section class="section-block">
         <div class="section-heading">
-          <div><p class="eyebrow">状态快照</p><h2>Runtime 与流动性池</h2></div>
-          <span id="snapshot-block" class="muted">尚无区块快照</span>
+          <div><p class="eyebrow">STATE SNAPSHOT</p><h2>Runtime &amp; Liquidity Pools</h2></div>
+          <span id="snapshot-block" class="muted">No block snapshot yet</span>
         </div>
         <div class="table-wrap">
-          <table>
-            <thead><tr><th>池地址</th><th>资产</th><th>储备</th><th>费率</th><th>区块</th></tr></thead>
-            <tbody id="pools-body"><tr><td colspan="5" class="empty">尚未保存池状态快照</td></tr></tbody>
+          <table class="pools-table">
+            <caption class="sr-only">Runtime and liquidity pool state snapshot</caption>
+            <thead><tr><th>Pool Address</th><th>Assets</th><th>Reserves</th><th>Fee</th><th>Block</th></tr></thead>
+            <tbody id="pools-body"><tr><td colspan="5" class="empty">No pool snapshot saved yet</td></tr></tbody>
           </table>
         </div>
       </section>
 
       <section class="section-block">
         <div class="section-heading">
-          <div><p class="eyebrow">可追踪执行</p><h2>Intent 与交易证据</h2></div>
-          <label class="search"><span>筛选</span><input id="search" type="search" placeholder="Intent / route / tx hash" autocomplete="off"></label>
+          <div><p class="eyebrow">TRACEABLE EXECUTION</p><h2>Intent &amp; Transaction Evidence</h2></div>
+          <label class="search"><span>Filter evidence</span><input id="search" type="search" placeholder="Intent hash / route hash / tx hash" aria-controls="evidence-body" autocomplete="off"></label>
         </div>
         <div class="table-wrap">
           <table class="evidence-table">
-            <thead><tr><th>Intent</th><th>状态</th><th>报价</th><th>Route</th><th>交易 hash</th><th>区块 / 事件</th><th>结果</th></tr></thead>
-            <tbody id="evidence-body"><tr><td colspan="7" class="empty">尚无执行证据</td></tr></tbody>
+            <caption class="sr-only">Intent and transaction execution evidence</caption>
+            <thead><tr><th>Intent</th><th>Status</th><th>Quote</th><th>Route</th><th>Transaction Hash</th><th>Block / Events</th><th>Result</th></tr></thead>
+            <tbody id="evidence-body"><tr><td colspan="7" class="empty">No execution evidence yet</td></tr></tbody>
           </table>
         </div>
-        <div id="detail" class="detail-panel" hidden></div>
+        <div id="detail" class="detail-panel" role="region" aria-live="polite" aria-label="Execution evidence details" tabindex="-1" hidden></div>
       </section>
 
       <section class="section-block bottom-grid">
         <div>
-          <div class="section-heading compact"><div><p class="eyebrow">可复现</p><h2>验收报告</h2></div></div>
-          <p class="section-copy">报告从当前 SQLite 证据库读取部署记录、交易和测量耗时；不足项会保留为未达标。</p>
+          <div class="section-heading compact"><div><p class="eyebrow">REPRODUCIBLE</p><h2>Acceptance Report</h2></div></div>
+          <p class="section-copy">The report reads deployment records, transactions, and measured latency from the current SQLite evidence store. Missing requirements remain unfulfilled.</p>
           <code class="command">npm run p8:acceptance</code>
         </div>
         <div class="requirement-list">
-          <div><span>测试网交易</span><strong id="requirement-transactions">0 / 10</strong></div>
-          <div><span>部署记录</span><strong id="requirement-deployments">未采集</strong></div>
-          <div><span>性能样本</span><strong id="requirement-performance">未采集</strong></div>
+          <div><span>Testnet Transactions</span><strong id="requirement-transactions">0 / 10</strong></div>
+          <div><span>Deployment Records</span><strong id="requirement-deployments">Not collected</strong></div>
+          <div><span>Performance Samples</span><strong id="requirement-performance">Not collected</strong></div>
         </div>
       </section>
-      <footer>只读视图 · 交易、签名与链上写入不由此面板触发</footer>
+      <footer>Intent submission is local to this dashboard. Broadcast requires an explicit server setting and a configured test account.</footer>
     </main>
   </body>
 </html>

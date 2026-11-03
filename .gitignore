@@ -17,7 +17,15 @@ config/local*.toml
 /docs
 !/docs/
 /docs/*
+/
 !/docs/p6-p8-operations.zh-CN.md
+!/docs/inspection-readiness.zh-CN.md
+!/docs/dashboard-frontend-style-refactor.zh-CN.md
+!/docs/dashboard-frontend-refactor-development-cycle.zh-CN.md
+!/docs/dashboard-frontend-refactor-p0-baseline.zh-CN.md
+!/docs/dashboard-frontend-refactor-p7-acceptance.zh-CN.md
+!/docs/p4-p8-single-chain-acceptance.zh-CN.md
+!/docs/architecture-design.zh-CN.md
 /scripts
 !/scripts/
 /scripts/*
@@ -31,6 +39,7 @@ config/local*.toml
 !/scripts/deploy-p2-testnet.mjs
 !/scripts/p8-generate-acceptance.mjs
 !/scripts/p8-probe-readonly.mjs
+!/scripts/p4-p8-acceptance.mjs
 /data/*.sqlite3
 /data/*.sqlite3-shm
 /data/*.sqlite3-wal

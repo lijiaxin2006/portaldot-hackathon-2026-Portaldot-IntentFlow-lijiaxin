@@ -4,11 +4,11 @@ websocket_url_env = "PORTALDOT_TESTNET_WS_URL"
 ss58_format = 42
 
 [contracts]
-token_a = ""
-token_b = ""
-pool_a = ""
-pool_b = ""
-intent_router = ""
+token_a = "5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV"
+token_b = "5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP"
+pool_a = "5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx"
+pool_b = "5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7"
+intent_router = "5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o"
 
 [solver]
 max_hops = 2

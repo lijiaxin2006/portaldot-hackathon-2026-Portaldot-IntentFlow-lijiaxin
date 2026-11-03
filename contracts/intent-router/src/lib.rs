@@ -231,9 +231,6 @@ mod intent_router {
             if intent.amount_in == 0 {
                 return Err(ContractError::InvalidAmount);
             }
-            if intent.asset_in == intent.asset_out {
-                return Err(ContractError::InvalidAssetPair);
-            }
             if account_is_zero(intent.owner) || intent.intent_id == Hash::from([0; 32]) {
                 return Err(ContractError::ZeroAddress);
             }

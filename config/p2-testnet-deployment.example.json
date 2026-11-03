@@ -1,0 +1,38 @@
+{
+  "network": "portaldot-testnet",
+  "endpoint_host": "test-node-v3.portaldot.dev",
+  "contracts": {
+    "token_a": {
+      "name": "IntentFlow Test Token A",
+      "symbol": "IFTA",
+      "decimals": 12,
+      "initial_supply": "2200000000000000000"
+    },
+    "token_b": {
+      "name": "IntentFlow Test Token B",
+      "symbol": "IFTB",
+      "decimals": 12,
+      "initial_supply": "2400000000000000000"
+    },
+    "pool_a": { "fee_bps": 30 },
+    "pool_b": { "fee_bps": 30 },
+    "intent_router": {}
+  },
+  "liquidity": {
+    "pool_a": {
+      "token_a": "1000000000000000000",
+      "token_b": "1000000000000000000"
+    },
+    "pool_b": {
+      "token_a": "1000000000000000000",
+      "token_b": "1100000000000000000"
+    }
+  },
+  "acceptance_swap": {
+    "enabled": true,
+    "amount_in": "1000000000000000",
+    "amount_out_min": "900000000000000",
+    "max_fee": "10000000000000",
+    "deadline_blocks": 5
+  }
+}
