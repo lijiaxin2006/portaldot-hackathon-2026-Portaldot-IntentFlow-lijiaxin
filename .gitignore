@@ -3,6 +3,7 @@
 /contracts/target/
 /contracts/*/target/
 /contracts/*/Cargo.lock
+!/contracts/p0-probe/Cargo.lock
 /tools/p0-wasm-postprocess/target/
 /node_modules/
 /.cargo/
