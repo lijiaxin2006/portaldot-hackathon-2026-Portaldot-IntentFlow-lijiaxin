@@ -2,7 +2,7 @@ use defi_domain::{
     AccountId, AssetId, BlockRef, ContractId, NetworkId, PoolKind, PoolSnapshot, SwapIntent,
 };
 use defi_engine::{RiskConfig, RouteGraph};
-use portaldot_solver::{evaluate, SolverConfig};
+use portaldot_solver::{SolverConfig, evaluate};
 use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {

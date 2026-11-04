@@ -8,7 +8,6 @@ members = [
   "crates/portaldot-solver",
   "crates/portaldot-executor",
   "crates/evidence-store",
-  "crates/cross-chain-simulator",
 ]
 resolver = "3"
 
@@ -30,7 +29,6 @@ portaldot-config = { path = "crates/portaldot-config" }
 portaldot-dex = { path = "crates/portaldot-dex" }
 portaldot-executor = { path = "crates/portaldot-executor" }
 portaldot-solver = { path = "crates/portaldot-solver" }
-cross-chain-simulator = { path = "crates/cross-chain-simulator" }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
 sha2 = "0.10.9"

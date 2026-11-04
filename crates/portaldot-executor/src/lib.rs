@@ -647,24 +647,18 @@ pub async fn execute_and_record_expected_rejection<
     store.update(evidence.clone()).await?;
 
     let submission_started = Instant::now();
-    let receipt = match submit_expected_rejection(
-        adapter,
-        encoder,
-        signer,
-        request,
-        policy,
-        &simulation,
-    )
-    .await
-    {
-        Ok(receipt) => receipt,
-        Err(error) => {
-            evidence.failure_reason = Some(error.to_string());
-            evidence.submission_duration_ms = Some(elapsed_ms(submission_started));
-            store.update(evidence).await?;
-            return Err(error);
-        }
-    };
+    let receipt =
+        match submit_expected_rejection(adapter, encoder, signer, request, policy, &simulation)
+            .await
+        {
+            Ok(receipt) => receipt,
+            Err(error) => {
+                evidence.failure_reason = Some(error.to_string());
+                evidence.submission_duration_ms = Some(elapsed_ms(submission_started));
+                store.update(evidence).await?;
+                return Err(error);
+            }
+        };
     evidence.submission_duration_ms = Some(elapsed_ms(submission_started));
     evidence.execution.tx_hash = Some(receipt.tx_hash);
     evidence.execution.block_hash = Some(receipt.block.hash);

@@ -1,4 +1,4 @@
-//! Chain-neutral types for the local cross-chain simulation.
+﻿//! Chain-neutral types for the local cross-chain simulation.
 //!
 //! These values describe an intent and its state transitions only. They do not
 //! claim to be compatible with a bridge protocol or provide remote-chain
