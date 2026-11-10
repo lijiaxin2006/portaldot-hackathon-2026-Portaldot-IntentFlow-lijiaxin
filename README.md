@@ -12,6 +12,7 @@ Portaldot IntentFlow is an intent-driven DeFi execution system for Portaldot. Us
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
 - [Testing and Acceptance](#testing-and-acceptance)
+- [Testnet On-Chain Evidence](#testnet-on-chain-evidence)
 - [Dashboard](#dashboard)
 - [Security Boundaries](#security-boundaries)
 - [Related Documentation](#related-documentation)
@@ -165,6 +166,30 @@ npm run p8:acceptance
 | Public report | `npm run p8:acceptance` | Deployment, transactions, events, runtime environment, and acceptance thresholds |
 
 Local contract unit tests do not prove cross-contract rollback in the target runtime. That requires verification in the target contracts runtime or on a testnet. The public acceptance report reaches `ready_for_review` only when the deployment manifest, capability probe, successful finalized transactions, dry-run/submission performance samples, and reproducible runtime environment are all present.
+
+## Testnet On-Chain Evidence
+
+The following evidence comes from the Portaldot testnet acceptance snapshot generated on 2026-11-03. The report records 20 finalized swap transactions: 10 `Confirmed` and 10 `Rejected`; its overall status is `ready_for_review`. These are test-token transactions, not mainnet or production-user activity.
+
+### Deployed Contracts
+
+| Contract | Token / role | Address |
+| --- | --- | --- |
+| `token_a` | IFTA | `5HqqyY3wh7QGVp61PwZu1SaVpP1MB43zgSkhawXxbZSqw4uV` |
+| `token_b` | IFTB | `5CxhT4eMfjkRHpMMPJeUp6cevGocFDnzk3bHnmaTSpnsHriP` |
+| `pool_a` | AMM pool A | `5D2WV819oHM3kvEekfLis4f3deHkys2vS6AVAMTGLoi9ZPVx` |
+| `pool_b` | AMM pool B | `5DVRsqRZPfXe7hu4FMKAY8zDR43a6u7Y4BiwSWMFR89WbBr7` |
+| `intent_router` | Intent settlement router | `5FszZYxNiddFT9DP4tFWget9goRceKEB6d7iEaPaJBBuSG6o` |
+
+### Confirmed Swaps
+
+The amounts below are decoded from each finalized Router `RouteExecuted` event. Both test tokens use 12 decimal places.
+
+| Block | Status | Swap | Fee (IFTB) | Transaction hash | Block hash |
+| ---: | --- | --- | ---: | --- | --- |
+| 301513 | `Confirmed` | 1 IFTA → 0.994997082825 IFTB | 0.002993970177 | `0xeb584a890d4017c29b26a2dacc52b845ac3ab60a446090c9d3a014c0992a3a3b` | `0xb1624e785866754872599fda2c96cc1038d8cb80bb5463304b53e4fdec6ea120` |
+| 301517 | `Confirmed` | 1 IFTA → 0.994995097819 IFTB | 0.002993964204 | `0x3199a916803b8d21a70cc3179589650896fe7ecd22718a73b18ab48859d09a25` | `0xa2c6e64632ab80371d8831d1029baee1541faab4107129c011c6ccbe742def12` |
+| 301531 | `Confirmed` | 1 IFTA → 0.994993112818 IFTB | 0.002993958231 | `0xe196afedad33fb9fd9d5488438a24c63b207265fe9079d226389394a1871c804` | `0xfc88ced663b855bec7f54c914cdaaf902d6603a6b9588c63d519ced9d78d2c47` |
 
 ## Dashboard
 
